@@ -10,6 +10,8 @@ import java.util.List;
 
 public class Running {
 
+    private double km;
+
     public List<String> fileReader(Path path) {
         List<String> output = new ArrayList<>();
         path = Paths.get("src/test/resources/running.csv");
@@ -25,18 +27,19 @@ public class Running {
 
     public double calculateDistance(int year, int month) {
         Path path = Paths.get("src/test/resources/running.csv");
-        String[] a;
+        String[] a = new String[fileReader(path).size() - 1];
 
         LocalDate date = null;
         Double sum = 0.0;
 
         for (int i = 1; i < fileReader(path).size(); i++) {
+            String word = fileReader(path).get(i);
 
             a = fileReader(path).get(i).split(";");
 
             date = LocalDate.parse(a[1]);
 
-            if (date.getYear() == year && date.getMonth().getValue() == month) {
+            if (date.getYear() == year && date.getMonth().getValue() == 12) {
 
                 sum += Double.parseDouble(a[0].substring(0, 4).trim());
             }
